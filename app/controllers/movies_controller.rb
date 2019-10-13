@@ -24,12 +24,20 @@ class MoviesController < ApplicationController
       session[:sort] = @sort
       @checked = ratings_query.keys
       session[:ratings] = ratings_query
+      # redirect_to :sort => @sort, :ratings =>  
     else
       @movies = Movie.order(@sort) 
       @checked = @all_ratings
       session[:sort] = @sort
-      reset_session
+      # redirect_to :sort => sort
     end
+
+    if params[:ratings] != session[:ratings] || params[:sort] != session[:sort]
+      # session[:ratings] = params[:ratings]
+      # session[:sort] = params[:sort]
+      redirect_to :sort => @sort, :ratings => ratings_query and return
+    end
+    # redirect_to movies_path
   end
 
 
