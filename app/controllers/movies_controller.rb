@@ -13,19 +13,26 @@ class MoviesController < ApplicationController
   end
 
   def index
-    ratings_query = params[:ratings]
+    ratings_query = params[:ratings] || session[:ratings]
+    puts session[:ratings]
     @all_ratings = Movie.all_ratings
-    @sort = params[:sort]
+    @sort = params[:sort] || session[:sort]
     if ratings_query != nil
       ratings_keys = ratings_query.keys
       @movies = Movie.with_ratings(ratings_keys)
       @movies = @movies.order(@sort)
+      session[:sort] = @sort
       @checked = ratings_query.keys
+      session[:ratings] = ratings_query
     else
       @movies = Movie.order(@sort) 
       @checked = @all_ratings
+      session[:sort] = @sort
+      reset_session
     end
   end
+
+
 
   def new
     # default: render 'new' template

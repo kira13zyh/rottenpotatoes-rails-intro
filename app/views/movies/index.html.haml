@@ -14,9 +14,9 @@
   %thead
     %tr
       %th{:class=>('title' == @sort)?'hilite p-3 mb-2 bg-warning text-dark':""}= link_to "Movie Title", :sort => "title", :id=> "title_header"
-      %th{:class=>('rating' == @sort)?'hilite p-3 mb-2 bg-warning text-dark':""}= link_to "Rating", :sort => "rating"
+      %th Rating
       %th{:class=>('release_date' == @sort)?'hilite p-3 mb-2 bg-warning text-dark':""}= link_to "Release Date", :sort => "release_date", :id=> "release_date_header"
-      %th{:class=>('description' == @sort)?'hilite p-3 mb-2 bg-warning text-dark':""}= link_to "More Info", :sort => "description"
+      %th More Info
   %tbody
     - @movies.each do |movie|
       %tr
